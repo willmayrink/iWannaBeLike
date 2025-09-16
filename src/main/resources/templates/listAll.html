@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Role Models - I Wanna Be Like</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<div layout:fragment="content">
+    <div class="container mt-4">
+        <h1 class="mb-4">Role Models</h1>
+
+        <!-- Button to create new role model (admin only, placeholder for future) -->
+        <div class="mb-4" sec:authorize="hasRole('ADMIN')">
+            <a th:href="@{/new}" class="btn btn-primary">Add New Role Model</a>
+        </div>
+
+        <!-- Category filter (disabled until controller supports it) -->
+        <div class="mb-4">
+            <form th:action="@{/}" method="get">
+                <div class="input-group">
+                    <select name="category" class="form-select" disabled>
+                        <option value="">All Categories</option>
+                        <option value="Anime">Anime</option>
+                        <option value="Video Game">Video Game</option>
+                        <option value="Real">Real</option>
+                    </select>
+                    <button type="submit" class="btn btn-outline-secondary" disabled>Filter</button>
+                </div>
+                <small class="text-muted">Filter coming soon!</small>
+            </form>
+        </div>
+
+        <!-- Role Models Grid -->
+        <div class="row">
+            <div th:each="model : ${role_model}" class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${model.name}"></h5>
+                        <p class="card-text">
+                            <strong>Category:</strong> <span th:text="${model.category}"></span><br>
+                            <strong>Origin:</strong> <span th:text="${model.origin}"></span><br>
+                            <strong>Physique:</strong> <span th:text="${model.physiqueDescription}"></span>
+                        </p>
+                        <a th:href="@{/{id}(id=${model.id})}" class="btn btn-success btn-sm">View Details</a>
+                        <div sec:authorize="hasRole('ADMIN')">
+                            <a th:href="@{/{id}/edit(id=${model.id})}" class="btn btn-warning btn-sm">Edit</a>
+                            <form th:action="@{/{id}/delete(id=${model.id})}" method="post" style="display:inline;">
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this role model?')">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Message when no role models are found -->
+        <div th:if="${#lists.isEmpty(role_model)}" class="alert alert-info">
+            No role models found.
+        </div>
+    </div>
+</div>
+</body>
+</html>
