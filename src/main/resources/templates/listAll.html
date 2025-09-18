@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      data-bs-theme="dark"
       layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Role Models - I Wanna Be Like</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 <div layout:fragment="content">
     <div class="container mt-4">
         <h1 class="mb-4">Role Models</h1>
@@ -35,21 +44,20 @@
 
         <!-- Role Models Grid -->
         <div class="row">
-            <div th:each="model : ${role_model}" class="col-md-4 mb-3">
-                <div class="card h-100">
+            <div th:each="model : ${role_model}" class="col-md-4 mb-2">
+                <div class="card h-100 text-bg-secondary" style="height:350px;">
+                    <img th:src="@{/img/{icon}(icon=${model.icon_rolemodel})}" alt="" class="card-img-top img-fluid" style="max-height:150px;object-fit:cover;">
                     <div class="card-body">
-                        <h5 class="card-title" th:text="${model.name}"></h5>
-                        <p class="card-text">
-                            <strong>Category:</strong> <span th:text="${model.category}"></span><br>
-                            <strong>Origin:</strong> <span th:text="${model.origin}"></span><br>
-                            <strong>Physique:</strong> <span th:text="${model.physiqueDescription}"></span>
+                        <div><span class="card-title badge text-bg-dark rounded-pill card-title-custom" th:text="${model.name}"></span>
+                            <span th:text="${model.category}" class="badge text-bg-light rounded-pill me-1 ms-2 tag-description"></span>
+                            <span th:text="${model.origin}" class="badge text-bg-light rounded-pill tag-description"></span></div>
+                        <p class="card-text card-text-custom mt-2">
+                            <span th:text="${model.physiqueDescription}" class="fw-light"></span>
                         </p>
-                        <a th:href="@{/{id}(id=${model.id})}" class="btn btn-success btn-sm">View Details</a>
-                        <div sec:authorize="hasRole('ADMIN')">
-                            <a th:href="@{/{id}/edit(id=${model.id})}" class="btn btn-warning btn-sm">Edit</a>
-                            <form th:action="@{/{id}/delete(id=${model.id})}" method="post" style="display:inline;">
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this role model?')">Delete</button>
-                            </form>
+                        <div class="text-end">
+                            <a th:href="@{/physiques/{name}(name=${model.name})}">
+                                <span class="badge text-bg-success card-text-custom">View details</span>
+                            </a>
                         </div>
                     </div>
                 </div>
