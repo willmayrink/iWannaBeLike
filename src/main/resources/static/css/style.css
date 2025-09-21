@@ -29,3 +29,8 @@
 .bg-indigo-800 { background-color: #290661; }
 .text-indigo-900 { color: #140330; }
 .bg-indigo-900 { background-color: #140330; }
+
+.card-custom-animation:hover{
+    transform: translateX(25px);
+    transition: all 0.5s ease-in-out;
+}
