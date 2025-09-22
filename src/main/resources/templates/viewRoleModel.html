@@ -11,6 +11,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
           rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -18,26 +20,64 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 <div layout:fragment="content">
-    <h3 class="mb-4">Role Model details</h3>
     <div class="container mt-4">
-
-        <!-- Role Models Grid -->
         <div class="row">
-            <div class="container">
-                <div th:each="model : ${role_model}" class="col-md-4 border border-2 rounded-4 p-3">
-                    <span th:text="${model.name}" class="display-5 fw-bold"></span>
-                    <span th:text="${model.category}" class="badge rounded-pill bg-indigo-500"></span>
-                    <span th:text="${model.origin}" class="badge rounded-pill bg-indigo-500"></span><br>
-                    <span class="badge rounded-pill">Measurements:</span><br>
-                    <span class="badge bg-indigo-500 rounded-end-0">Chest: </span><span th:text="${model.chestMeasurement}+'cm'" class="badge text-bg-light rounded-start-0"></span><br>
-                    <span class="badge bg-indigo-500 rounded-end-0">Shoulders: </span><span th:text="${model.shouldersMeasurement}+'cm'" class="badge text-bg-light rounded-start-0"></span><br>
-                    <span class="badge bg-indigo-500 rounded-end-0">Biceps: </span><span th:text="${model.bicepsMeasurement}+'cm'" class="badge text-bg-light rounded-start-0"></span><br>
-                    <span class="badge bg-indigo-500 rounded-end-0">Waist: </span><span th:text="${model.waistMeasurement}+'cm'" class="badge text-bg-light rounded-start-0"></span><br>
+            <div class="container" style="max-height:400px;">
+                <h4 class="mb-4">Role Model details</h4>
+                <div th:each="model : ${role_model}" class="d-flex flex-row border border-2 border-dark rounded-4 mb-5 shadow-lg custom-bg">
+                    <div class="flex-shrink-0">
+                        <img th:src="@{/img/{icon}(icon=${model.icon_rolemodel})}" alt=""
+                             class="img-fluid rounded-start-4" style="object-fit:cover;width:300px;height:420px">
                     </div>
+                    <div class="p-3">
+                        <div class="mb-2">
+                        <span th:text="${model.name}" class="display-5 fw-bold"></span>
+                        <span th:text="${model.category}" class="badge bg-indigo-700"></span>
+                        <span th:text="${model.origin}" class="badge  bg-indigo-700"></span>
+                        </div>
+                        <br>
+                        <span class="badge text-bg-light mb-2">Character info</span><br>
+                        <span class="badge bg-indigo-700 rounded-end-0">Age</span><span
+                            th:text="${model.age}"
+                            class="badge text-bg-light rounded-start-0 me-1"></span>
+                        <span class="badge bg-indigo-700 rounded-end-0">Height</span><span
+                            th:text="${model.height}+'cm'"
+                            class="badge text-bg-light rounded-start-0 me-1"></span>
+                        <span class="badge bg-indigo-700 rounded-end-0">Weight</span><span
+                            th:text="${model.weight}+'kg'"
+                            class="badge text-bg-light rounded-start-0 me-1"></span>
+                        <hr class="my-3">
+                        <span class="badge text-bg-light mb-2">Measurements</span><br>
+                        <div>
+                            <a th:if="${model.chestMeasurement>120}"><span class="badge bg-indigo-700 rounded-end-0">Chest: </span><span th:text="${model.chestMeasurement}+'cm'" class="badge text-bg-light rounded-start-0 me-1"></span><span class="material-icons text-danger" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
+                            <a th:if="${model.chestMeasurement>=110 and model.chestMeasurement<120}"><span class="badge bg-indigo-700 rounded-end-0">Chest: </span><span th:text="${model.chestMeasurement}+'cm'" class="badge text-bg-light rounded-start-0 me-1"></span><span class="material-icons text-warning" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
+                            <a th:if="${model.chestMeasurement<=109}"><span class="badge bg-indigo-700 rounded-end-0">Chest: </span><span th:text="${model.chestMeasurement}+'cm'" class="badge text-bg-light rounded-start-0 me-1"></span><span class="material-icons text-success" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
+                            <span class="badge bg-indigo-700 rounded-end-0">Shoulders: </span><span
+                                th:text="${model.shouldersMeasurement}+'cm'"
+                                class="badge text-bg-light rounded-start-0 me-1"></span>
+                            <a th:if="${model.shouldersMeasurement>=120}"><span class="material-icons text-danger" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
+                            <a th:if="${model.shouldersMeasurement>=110 and model.shouldersMeasurement<120}"><span class="material-icons text-warning" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
+                            <a th:if="${model.shouldersMeasurement<110}"><span class="material-icons text-success" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
+                            <span class="badge bg-indigo-700 rounded-end-0">Biceps: </span><span
+                                th:text="${model.bicepsMeasurement}+'cm'"
+                                class="badge text-bg-light rounded-start-0 me-1"></span>
+                            <a th:if="${model.bicepsMeasurement>=45}"><span class="material-icons text-danger" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
+                            <a th:if="${model.bicepsMeasurement>=40 and model.bicepsMeasurement<45}"><span class="material-icons text-warning" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
+                            <a th:if="${model.bicepsMeasurement<40}"><span class="material-icons text-success" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
+                            <span class="badge bg-indigo-700 rounded-end-0">Waist: </span><span
+                                th:text="${model.waistMeasurement}+'cm'"
+                                class="badge text-bg-light rounded-start-0 me-1"></span>
+                            <a th:if="${model.waistMeasurement<=70}"><span class="material-icons text-danger" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
+                            <a th:if="${model.waistMeasurement>70 and model.waistMeasurement<=100}"><span class="material-icons text-warning" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
+                            <a th:if="${model.waistMeasurement>=110}"><span class="material-icons text-success" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
+                        </div>
+                        <hr class="my-3">
+                        <span class="badge text-bg-light mb-2">Description</span><br>
+                        <p th:text="${model.physiqueDescription}" class="justified-text view-model-description"></p>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <!-- Message when no role models are found -->
         <div th:if="${#lists.isEmpty(role_model)}" class="alert alert-info">
             No role models found.
         </div>
