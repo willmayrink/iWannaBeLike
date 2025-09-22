@@ -27,14 +27,14 @@ public class RoleModel {
     @Column(name = "origem", nullable = false, length = 100)
     private String origin;
 
-    @Column(name = "idade", length = 50)
+    @Column(name = "idade")
     private String age;
 
-    @Column(name = "altura", length = 50)
-    private String height;
+    @Column(name = "altura")
+    private Integer height;
 
-    @Column(name = "peso", length = 50)
-    private String weight;
+    @Column(name = "peso")
+    private Integer weight;
 
     @Column(name = "peito_cm")
     private Integer chestMeasurement;
