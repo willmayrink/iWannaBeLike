@@ -22,8 +22,9 @@
         <h1 class="mb-4">Role Models</h1>
         <!-- Role Models Grid -->
         <div class="row">
-            <div th:each="model : ${role_model}" class="col-md-3 mb-4 card-custom-animation">
-                <div class="card text-bg-light h-100 d-flex flex-row shadow-lg" style="max-height:122px; max-width:34rem;">
+            <div th:each="model : ${role_model}" class="col-md-6 col-xxl-3 col-lg-4 mb-4 card-custom-animation">
+                <a th:href="@{/role_models/{id}(id=${model.id})}" class="text-decoration-none">
+                <div class="card text-light custom-bg h-100 d-flex flex-row shadow-lg" style="max-height:122px; max-width:34rem;">
                     <!-- Image on the left -->
                     <div class="flex-shrink-0">
                         <img th:src="@{/img/{icon}(icon=${model.icon_rolemodel})}" alt=""
@@ -32,18 +33,19 @@
                     <!-- Card body on the right -->
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
-                            <span class="card-title badge text-bg-dark rounded-pill card-title-custom"
+                            <span class="card-title badge text-bg-light rounded-pill"
                                   th:text="${model.name}"></span>
                             <span th:text="${model.category}"
                                   class="badge text-light bg-indigo-500 rounded-pill me-1 ms-2 tag-description "></span>
                             <span th:text="${model.origin}"
                                   class="badge text-light bg-indigo-500 rounded-pill tag-description "></span>
                         </div>
-                        <p class="card-text card-text-custom mt-2">
-                            <span th:text="${model.physiqueDescription}" class="fw-light"></span>
+                        <p class="card-text card-text-custom mt-1">
+                            <span th:text="${model.physiqueDescription}" class="card-text-overflow view-model-description"></span>
                         </p>
                     </div>
                 </div>
+                </a>
             </div>
         </div>
 
