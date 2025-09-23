@@ -1,4 +1,4 @@
-package com.willmayrink.iWannaBeLike.model;
+package com.willmayrink.iWannaBeLike.model.rolemodel;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -48,7 +48,7 @@ public class RoleModel {
     @Column(name = "cintura_cm")
     private Integer waistMeasurement;
 
-    @Column(name = "descricao_fisico")
+    @Column(name = "descricao_fisico", columnDefinition = "TEXT")
     private String physiqueDescription;
 
     @Column(name = "realismo_fisico")

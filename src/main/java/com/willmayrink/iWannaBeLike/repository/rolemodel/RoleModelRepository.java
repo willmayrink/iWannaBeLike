@@ -1,6 +1,6 @@
-package com.willmayrink.iWannaBeLike.repository;
+package com.willmayrink.iWannaBeLike.repository.rolemodel;
 
-import com.willmayrink.iWannaBeLike.model.RoleModel;
+import com.willmayrink.iWannaBeLike.model.rolemodel.RoleModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

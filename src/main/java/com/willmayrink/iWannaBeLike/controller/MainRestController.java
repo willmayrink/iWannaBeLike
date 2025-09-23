@@ -1,7 +1,7 @@
 package com.willmayrink.iWannaBeLike.controller;
 
-import com.willmayrink.iWannaBeLike.model.RoleModel;
-import com.willmayrink.iWannaBeLike.repository.RoleModelRepository;
+import com.willmayrink.iWannaBeLike.model.rolemodel.RoleModel;
+import com.willmayrink.iWannaBeLike.repository.rolemodel.RoleModelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

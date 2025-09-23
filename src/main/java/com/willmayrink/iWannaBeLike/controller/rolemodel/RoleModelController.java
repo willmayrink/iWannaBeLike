@@ -1,14 +1,13 @@
-package com.willmayrink.iWannaBeLike.controller;
+package com.willmayrink.iWannaBeLike.controller.rolemodel;
 
-import com.willmayrink.iWannaBeLike.model.RoleModel;
-import com.willmayrink.iWannaBeLike.repository.RoleModelRepository;
-import com.willmayrink.iWannaBeLike.service.RoleModelService;
+import com.willmayrink.iWannaBeLike.model.rolemodel.RoleModel;
+import com.willmayrink.iWannaBeLike.repository.rolemodel.RoleModelRepository;
+import com.willmayrink.iWannaBeLike.service.rolemodel.RoleModelService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import javax.management.relation.Role;
 import java.util.List;
 
 @Controller
