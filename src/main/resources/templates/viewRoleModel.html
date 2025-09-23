@@ -32,7 +32,11 @@
                     <div class="p-3">
                         <div class="mb-2">
                         <span th:text="${model.name}" class="display-5 fw-bold"></span>
-                        <span th:text="${model.category}" class="badge bg-indigo-700"></span>
+                        <a th:switch="${model.category}">
+                                <span th:case="'Anime'" th:text="${model.category}" class="badge text-bg-danger"></span>
+                                <span th:case="'Video Game'" th:text="${model.category}" class="badge text-bg-primary"></span>
+                                <span th:case="'Real'" th:text="${model.category}" class="badge text-bg-success"></span>
+                        </a>
                         <span th:text="${model.origin}" class="badge  bg-indigo-700"></span>
                         </div>
                         <br>
