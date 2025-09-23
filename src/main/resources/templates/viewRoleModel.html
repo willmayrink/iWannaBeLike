@@ -133,7 +133,7 @@
                             class="badge text-bg-light rounded-start-0 me-1"></span>
                         <hr class="my-3">
                         <span class="badge text-bg-light mb-2">Measurements</span><br>
-                        <div>
+                        <div class="d-none">
                             <a th:if="${model.chestMeasurement>120}"><span class="badge bg-indigo-700 rounded-end-0">Chest: </span><span th:text="${model.chestMeasurement}+'cm'" class="badge text-bg-light rounded-start-0 me-1" id="chestValue"></span><span class="material-icons text-danger" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
                             <a th:if="${model.chestMeasurement>=110 and model.chestMeasurement<120}"><span class="badge bg-indigo-700 rounded-end-0">Chest: </span><span th:text="${model.chestMeasurement}+'cm'" class="badge text-bg-light rounded-start-0 me-1" id="chestValue"></span><span class="material-icons text-warning" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
                             <a th:if="${model.chestMeasurement<=109}"><span class="badge bg-indigo-700 rounded-end-0">Chest: </span><span th:text="${model.chestMeasurement}+'cm'" class="badge text-bg-light rounded-start-0 me-1" id="chestValue"></span><span class="material-icons text-success" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
@@ -155,8 +155,9 @@
                             <a th:if="${model.waistMeasurement<=70}"><span class="material-icons text-danger" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
                             <a th:if="${model.waistMeasurement>70 and model.waistMeasurement<=100}"><span class="material-icons text-warning" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
                             <a th:if="${model.waistMeasurement>=110}"><span class="material-icons text-success" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
-                            <canvas class="radar-chart-canvas" width="100" height="100" id="radar-chart-canvas"></canvas>
+
                         </div>
+                        <canvas class="radar-chart-canvas" width="300" height="150" id="radar-chart-canvas"></canvas>
                         <hr class="my-3">
                         <span class="badge text-bg-light mb-2">Description</span><br>
                         <p th:text="${model.physiqueDescription}" class="justified-text view-model-description"></p>
