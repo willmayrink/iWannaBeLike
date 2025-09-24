@@ -26,79 +26,77 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Selecionar o canvas
-        const ctx = document.getElementById('radar-chart-canvas');
-        if (!ctx) {
-            console.log('Canvas não encontrado');
-            return;
-        }
+    const ctx = document.getElementById('radar-chart-canvas');
+    if (!ctx) return;
 
-        // Extrair valores do DOM usando IDs
-        const name = document.querySelector('span.display-5.fw-bold')?.textContent || 'Role Model';
-        const chest = parseInt(document.getElementById('chestValue')?.textContent.replace('cm', '').trim()) || 0;
-        const shoulders = parseInt(document.getElementById('shouldersValue')?.textContent.replace('cm', '').trim()) || 0;
-        const biceps = parseInt(document.getElementById('bicepsValue')?.textContent.replace('cm', '').trim()) || 0;
-        const waist = parseInt(document.getElementById('waistValue')?.textContent.replace('cm', '').trim()) || 0;
+    const name = document.querySelector('span.display-5.fw-bold')?.textContent || 'Role Model';
+    const chest = parseInt(document.getElementById('chestValue')?.textContent.replace('cm', '').trim()) || 0;
+    const shoulders = parseInt(document.getElementById('shouldersValue')?.textContent.replace('cm', '').trim()) || 0;
+    const biceps = parseInt(document.getElementById('bicepsValue')?.textContent.replace('cm', '').trim()) || 0;
+    const waist = parseInt(document.getElementById('waistValue')?.textContent.replace('cm', '').trim()) || 0;
 
-        // Verificar se os valores foram obtidos
-        if (!chest || !shoulders || !biceps || !waist) {
-            console.log('Erro ao obter valores do DOM:', { chest, shoulders, biceps, waist });
-            return;
-        }
+    if (!chest || !shoulders || !biceps || !waist) return;
 
-        // Configurar o gráfico
-        const data = {
-            labels: ['Chest', 'Shoulders', 'Biceps', 'Waist'],
-            datasets: [{
-                data: [chest, shoulders, biceps, waist],
-                fill: true,
-                backgroundColor: 'rgba(255, 215, 0, 0.2)', // Amarelo claro com opacidade
-                borderColor: 'rgb(255, 215, 0)', // Amarelo sólido
-                borderWidth: 1, // Linha mais grossa conforme sugestão do documento
-                pointBackgroundColor: 'rgb(255, 215, 0)',
-                pointBorderColor: '#fff',
-                pointHoverBackgroundColor: '#fff',
-                pointHoverBorderColor: 'rgb(255, 215, 0)',
-                tension: 0.1
-            }]
-        };
+    // Valores máximos de referência para normalização
+    const maxValues = {
+        chest: 160,    // Exemplo: um peito de 150cm é 100% na escala
+        shoulders: 170, // Exemplo: ombros de 150cm é 100%
+        biceps: 80,    // Exemplo: bíceps de 50cm é 100%
+        waist: 100     // Exemplo: cintura de 110cm é 100%
+    };
 
-        new Chart(ctx, {
-            type: 'radar',
-            data: data,
-            options: {
-                responsive: false,
-                maintainAspectRatio: false,
-                aspectRatio: 1,
-                scales: {
-                    r: {
-                        beginAtZero: true,
-                        max: 150,
-                        ticks: {
-                            display: false // Oculta os valores numéricos
-                        },
-                        grid: {
-                            display: true, // Oculta as linhas da grade
-                            color: 'rgba(255,255,255, 0.1)'
-                        },
-                        angleLines: {
-                            display: true, // Oculta as linhas angulares
-                            color: 'rgba(255,255,255, 0.1)'
-                        },
-                        pointLabels: {
-                            display: true, // Oculta os rótulos dos eixos
-                            color: 'rgba(255,255,255, 0.6)'
+    // Normalizando os dados
+    const normalizedData = [
+        (chest / maxValues.chest) * 100,
+        (shoulders / maxValues.shoulders) * 100,
+        (biceps / maxValues.biceps) * 100,
+        (waist / maxValues.waist) * 100
+    ];
+
+    const data = {
+        labels: ['Chest', 'Shoulders', 'Biceps', 'Waist'],
+        datasets: [{
+            data: normalizedData, // Usando os dados normalizados
+            fill: true,
+            backgroundColor: 'rgba(255, 215, 0, 0.2)',
+            borderColor: 'rgb(255, 215, 0)',
+            borderWidth: 1,
+            pointBackgroundColor: 'rgb(255, 215, 0)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgb(255, 215, 0)',
+            tension: 0.1
+        }]
+    };
+
+    new Chart(ctx, {
+        type: 'radar',
+        data: data,
+        options: {
+            responsive: false,
+            maintainAspectRatio: false,
+            aspectRatio: 1,
+            scales: {
+                r: {
+                    beginAtZero: true,
+                    max: 100, // Escala agora vai até 100, que representa 100%
+                    ticks: {
+                        display: false, // Pode exibir os valores em porcentagem
+                        callback: function(value) {
+                            return value + '%';
                         }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false // Mantém a legenda oculta
-                    }
+                    },
+                    grid: { color: 'rgba(255,255,255, 0.1)' },
+                    angleLines: { color: 'rgba(255,255,255, 0.1)' },
+                    pointLabels: { display: true, color: 'rgba(255,255,255, 0.6)' }
                 }
+            },
+            plugins: {
+                legend: { display: false }
             }
-        });
+        }
     });
+});
 </script>
 <div layout:fragment="content">
     <div class="container mt-4">
@@ -133,31 +131,29 @@
                             class="badge text-bg-light rounded-start-0 me-1"></span>
                         <hr class="my-3">
                         <span class="badge text-bg-light mb-2">Measurements</span><br>
-                        <div class="d-none">
-                            <a th:if="${model.chestMeasurement>120}"><span class="badge bg-indigo-700 rounded-end-0">Chest: </span><span th:text="${model.chestMeasurement}+'cm'" class="badge text-bg-light rounded-start-0 me-1" id="chestValue"></span><span class="material-icons text-danger" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
-                            <a th:if="${model.chestMeasurement>=110 and model.chestMeasurement<120}"><span class="badge bg-indigo-700 rounded-end-0">Chest: </span><span th:text="${model.chestMeasurement}+'cm'" class="badge text-bg-light rounded-start-0 me-1" id="chestValue"></span><span class="material-icons text-warning" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
-                            <a th:if="${model.chestMeasurement<=109}"><span class="badge bg-indigo-700 rounded-end-0">Chest: </span><span th:text="${model.chestMeasurement}+'cm'" class="badge text-bg-light rounded-start-0 me-1" id="chestValue"></span><span class="material-icons text-success" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
-                            <span class="badge bg-indigo-700 rounded-end-0">Shoulders: </span><span
-                                th:text="${model.shouldersMeasurement}+'cm'"
-                                class="badge text-bg-light rounded-start-0 me-1" id="shouldersValue"></span>
-                            <a th:if="${model.shouldersMeasurement>=120}"><span class="material-icons text-danger" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
-                            <a th:if="${model.shouldersMeasurement>=110 and model.shouldersMeasurement<120}"><span class="material-icons text-warning" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
-                            <a th:if="${model.shouldersMeasurement<110}"><span class="material-icons text-success" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
-                            <span class="badge bg-indigo-700 rounded-end-0">Biceps: </span><span
-                                th:text="${model.bicepsMeasurement}+'cm'"
-                                class="badge text-bg-light rounded-start-0 me-1" id="bicepsValue"></span>
-                            <a th:if="${model.bicepsMeasurement>=45}"><span class="material-icons text-danger" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
-                            <a th:if="${model.bicepsMeasurement>=40 and model.bicepsMeasurement<45}"><span class="material-icons text-warning" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
-                            <a th:if="${model.bicepsMeasurement<40}"><span class="material-icons text-success" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
-                            <span class="badge bg-indigo-700 rounded-end-0">Waist: </span><span
-                                th:text="${model.waistMeasurement}+'cm'"
-                                class="badge text-bg-light rounded-start-0 me-1" id="waistValue"></span>
-                            <a th:if="${model.waistMeasurement<=70}"><span class="material-icons text-danger" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
-                            <a th:if="${model.waistMeasurement>70 and model.waistMeasurement<=100}"><span class="material-icons text-warning" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
-                            <a th:if="${model.waistMeasurement>=110}"><span class="material-icons text-success" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
-
+                        <div class="d-flex flex-row align-items-center">
+                            <div class="me-3">
+                                <a th:if="${model.chestMeasurement>120}"><span class="badge bg-indigo-700 rounded-end-0">Chest: </span><span th:text="${model.chestMeasurement}+'cm'" class="badge text-bg-light rounded-start-0 me-1" id="chestValue"></span><span class="material-icons text-danger" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
+                                <a th:if="${model.chestMeasurement>=110 and model.chestMeasurement<120}"><span class="badge bg-indigo-700 rounded-end-0">Chest: </span><span th:text="${model.chestMeasurement}+'cm'" class="badge text-bg-light rounded-start-0 me-1" id="chestValue"></span><span class="material-icons text-warning" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
+                                <a th:if="${model.chestMeasurement<=109}"><span class="badge bg-indigo-700 rounded-end-0">Chest: </span><span th:text="${model.chestMeasurement}+'cm'" class="badge text-bg-light rounded-start-0 me-1" id="chestValue"></span><span class="material-icons text-success" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
+                                <span class="badge bg-indigo-700 rounded-end-0">Shoulders: </span><span th:text="${model.shouldersMeasurement}+'cm'" class="badge text-bg-light rounded-start-0 me-1" id="shouldersValue"></span>
+                                <a th:if="${model.shouldersMeasurement>=120}"><span class="material-icons text-danger" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
+                                <a th:if="${model.shouldersMeasurement>=110 and model.shouldersMeasurement<120}"><span class="material-icons text-warning" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
+                                <a th:if="${model.shouldersMeasurement<110}"><span class="material-icons text-success" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
+                                <span class="badge bg-indigo-700 rounded-end-0">Biceps: </span><span th:text="${model.bicepsMeasurement}+'cm'" class="badge text-bg-light rounded-start-0 me-1" id="bicepsValue"></span>
+                                <a th:if="${model.bicepsMeasurement>=45}"><span class="material-icons text-danger" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
+                                <a th:if="${model.bicepsMeasurement>=40 and model.bicepsMeasurement<45}"><span class="material-icons text-warning" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
+                                <a th:if="${model.bicepsMeasurement<40}"><span class="material-icons text-success" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
+                                <span class="badge bg-indigo-700 rounded-end-0">Waist: </span><span th:text="${model.waistMeasurement}+'cm'" class="badge text-bg-light rounded-start-0 me-1" id="waistValue"></span>
+                                <a th:if="${model.waistMeasurement<=70}"><span class="material-icons text-danger" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
+                                <a th:if="${model.waistMeasurement>70 and model.waistMeasurement<=100}"><span class="material-icons text-warning" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
+                                <a th:if="${model.waistMeasurement>=110}"><span class="material-icons text-success" style="vertical-align:middle;">keyboard_double_arrow_up</span></a>
+                            </div>
+                            <div>
+                                <canvas class="radar-chart-canvas" width="200" height="200" id="radar-chart-canvas"></canvas>
+                            </div>
                         </div>
-                        <canvas class="radar-chart-canvas" width="300" height="150" id="radar-chart-canvas"></canvas>
+
                         <hr class="my-3">
                         <span class="badge text-bg-light mb-2">Description</span><br>
                         <p th:text="${model.physiqueDescription}" class="justified-text view-model-description"></p>
