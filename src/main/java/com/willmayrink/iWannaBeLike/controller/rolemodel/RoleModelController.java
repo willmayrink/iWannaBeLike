@@ -37,4 +37,10 @@ public class RoleModelController {
         model.addAttribute("anime_models", animeRoleModels);
         return "categoryView";
     }
+    @GetMapping("/firstPage")
+    public String firstView (Model model){
+    List<RoleModel> randomRoleModels = roleModelService.getRandomModels();
+    model.addAttribute("random_models", randomRoleModels);
+    return "firstPage";
+    }
 }

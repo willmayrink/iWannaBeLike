@@ -88,7 +88,7 @@
 }
 
 .card-custom-animation:hover {
-    transform: translateX(25px);
+    transform: translateY(-20px);
     transition: all 0.5s ease-in-out;
 }
 
@@ -116,7 +116,7 @@
 }
 
 .login-main-container {
-    background-color: rgba(255, 255, 255, .6);
+    background-color: rgba(255, 255, 255, .8);
     filter: brightness(1.2);
 }
 .bg-login{
@@ -138,4 +138,38 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7); /* Adjust the opacity as needed */
     z-index: -1; /* Ensure the overlay is behind the content */
+}
+
+
+.bg-card-login{
+    background-image: url('../img/login-background2.webp');
+    backdrop-filter: blur(15px);
+    background-position:center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+
+.typewriter{
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid white; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .12em; /* Adjust as needed */
+  animation:
+    typing 3.5s steps(30, end),
+    blink-caret .75s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: white; }
 }
