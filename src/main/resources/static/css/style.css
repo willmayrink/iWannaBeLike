@@ -185,3 +185,20 @@
     text-align: justify;
     backdrop-filter: blur(10px);
 }
+
+.landing-page-box{
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+}
+.available-model-label{
+    animation-name: scaleUpLoop;
+    animation-iteration-count: infinite;
+}
+@keyframes scaleUpLoop {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.3);
+    }
+}
