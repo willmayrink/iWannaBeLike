@@ -14,16 +14,17 @@ public class MainController {
     RoleModelRepository roleModelRepository;
 
     @RequestMapping("/")
-    public String listAllModels(){
-        return "templateLogin";
+    public String loginSuccessful(Model model){
+        model.addAttribute("role_model",roleModelRepository.findAll());
+        return "firstPage";
     }
     @GetMapping("/role_models")
     public String firstPage(Model model){
         model.addAttribute("role_model", roleModelRepository.findAll());
         return "listAll";
     }
-    @GetMapping("/login-custom")
+    @GetMapping("/login")
     public String viewLoginPage(){
-        return  "templateLogin";
+        return  "login";
     }
 }

@@ -29,7 +29,7 @@
         </div>
         <div class="d-inline-flex text-center p-4 rounded-end-5 login-main-container shadow"
              style="height: 280px; max-height: 40vh; width: 400px; max-width: 50vw;">
-            <form action="" data-bs-theme="light" class="ms-2">
+            <form th:action="@{/login}" method="post" data-bs-theme="light" class="ms-2">
                 <div class="justify-content-center">
                     <span class="fs-3 fw-light text-dark">Login</span>
                 </div>
@@ -38,19 +38,17 @@
                             <span class="material-icons">account_circle</span>
                         </span>
                     <input type="text" class="form-control" placeholder="username" aria-label="Username"
-                           aria-describedby="basic-addon1" style="max-width: 90%;">
+                           aria-describedby="basic-addon1" style="max-width: 90%;" id="username" name="username" required>
                 </div>
                 <div class="input-group mb-4 mt-3 justify-content-center">
                         <span class="input-group-text text-bg-dark" id="basic-addon2">
                             <span class="material-icons">password</span>
                         </span>
                     <input type="password" class="form-control" placeholder="***********" aria-label="Password"
-                           aria-describedby="basic-addon2" style="max-width: 90%;">
+                           aria-describedby="basic-addon2" style="max-width: 90%;" id="password" name="password" required>
                 </div>
                 <div class="d-flex justify-content-end" style="max-width:50%; margin-left: 50%;">
-                    <a th:href="@{/role_models}" class="btn btn-sm rounded-2 text-bg-primary ps-3 pe-3 shadow-lg">
-                        Login<span class="material-icons ms-2" style="vertical-align: middle;">login</span>
-                    </a>
+                    <button type="submit" class="btn btn-sm rounded-2 text-bg-primary ps-3 pe-3 shadow-lg">login <span class="material-icons ms-2" style="vertical-align:middle;">login</span></button>
                 </div>
             </form>
         </div>
@@ -67,7 +65,7 @@
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
         crossorigin="anonymous"></script>
 <script>
-    const texts = ['I wanna be like Mikasa.', 'I wanna be like Goku.', 'I wanna be like All Might.', 'I wanna be like Zoro.'];
+    const texts = ['I wanna be like Mikasa.', 'I wanna be like Vegeta.', 'I wanna be like All Might.', 'I wanna be like Saitama.'];
     let textIndex = 0;
     let charIndex = 0;
     let isDeleting = false;

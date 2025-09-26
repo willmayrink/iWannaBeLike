@@ -173,3 +173,15 @@
   from, to { border-color: transparent }
   50% { border-color: white; }
 }
+
+
+.custom-nav-item:hover{
+    transform: scale(1.2);
+    transform: translateY(-8px);
+    transition: all 0.3s ease-in-out;
+}
+
+.main-landing-container{
+    text-align: justify;
+    backdrop-filter: blur(10px);
+}

@@ -20,10 +20,9 @@
 <div layout:fragment="content">
     <div class="d-flex flex-row login-main-container justify-content-center pt-2 pb-2 rounded-2" style="width: 80%; margin:auto; margin-top:15vh;">
         <div th:each="model : ${random_models}" class="justify-content-center flex-row">
-            <a th:href="@{/role_models/{id}(id=${model.id})}" class="text-decoration-none m-0">
-                <img th:src="@{/img/{icon}(icon=${model.icon_rolemodel})}" alt="" class="img-fluid rounded" style="object-fit:cover;width:32px;height:32px">
-                <span  th:text="${model.origin}" class="badge text-bg-primary rounded-end-0"></span>
-                <span th:text="${model.name}" class="badge text-bg-dark rounded-start-0 me-1"></span>
+            <a th:href="@{/role_models/{id}(id=${model.id})}" class="link-decoration-none m-0">
+                <img th:src="@{/img/{icon}(icon=${model.icon_rolemodel})}" alt="" class="img-fluid rounded" style="object-fit:cover;width:64px;height:64px">
+                <span th:text="${model.name}" class="badge text-bg-primary rounded-pill me-3"></span>
             </a>
         </div>
     </div>
