@@ -16,7 +16,7 @@ public class MainController {
     @RequestMapping("/")
     public String loginSuccessful(Model model){
         model.addAttribute("role_model",roleModelRepository.findAll());
-        return "firstPage";
+        return "landingPage";
     }
     @GetMapping("/role_models")
     public String firstPage(Model model){

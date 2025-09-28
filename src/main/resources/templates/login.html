@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+<script src="https://accounts.google.com/gsi/client" async></script>
 <header>
     <!-- place navbar here -->
 </header>
@@ -34,28 +35,32 @@
                     <span class="fs-3 fw-light text-dark">Login</span>
                 </div>
                 <div class="input-group mt-4 justify-content-center">
-                        <span class="input-group-text text-bg-dark" id="basic-addon1">
-                            <span class="material-icons">account_circle</span>
-                        </span>
+                    <span class="input-group-text text-bg-dark" id="basic-addon1">
+                        <span class="material-icons">account_circle</span>
+                    </span>
                     <input type="text" class="form-control" placeholder="username" aria-label="Username"
                            aria-describedby="basic-addon1" style="max-width: 90%;" id="username" name="username" required>
                 </div>
                 <div class="input-group mb-4 mt-3 justify-content-center">
-                        <span class="input-group-text text-bg-dark" id="basic-addon2">
-                            <span class="material-icons">password</span>
-                        </span>
+                    <span class="input-group-text text-bg-dark" id="basic-addon2">
+                        <span class="material-icons">password</span>
+                    </span>
                     <input type="password" class="form-control" placeholder="***********" aria-label="Password"
                            aria-describedby="basic-addon2" style="max-width: 90%;" id="password" name="password" required>
                 </div>
-                <div class="d-flex justify-content-end" style="max-width:50%; margin-left: 50%;">
-                    <button type="submit" class="btn btn-sm rounded-2 text-bg-primary ps-3 pe-3 shadow-lg">login <span class="material-icons ms-2" style="vertical-align:middle;">login</span></button>
+                <div class="d-flex justify-content-end gap-2" style="width: 100%;">
+                    <a href="/oauth2/authorization/google">
+                        <button type="button" class="btn btn-sm btn-dark rounded-2">Google Account<img height="12" width="12" src="https://cdn.simpleicons.org/google/white" class="ms-2" style="vertical-align:middle;" /></button>
+                    </a>
+                    <button type="submit" class="btn btn-sm rounded-2 text-bg-primary ps-3 pe-3 shadow-lg">
+                        Login <span class="material-icons ms-2" style="vertical-align:middle;font-size:14px">login</span>
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 </main>
 <footer>
-    <!-- place footer here -->
 </footer>
 <!-- Bootstrap JavaScript Libraries -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
