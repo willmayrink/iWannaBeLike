@@ -1,14 +1,16 @@
 package com.willmayrink.iWannaBeLike.model.rolemodel;
 
+import com.willmayrink.iWannaBeLike.model.training.TrainingModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@Table(name = "role_models", schema = "iwannabelike")
+@Table(name = "role_models")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -46,4 +48,6 @@ public class RoleModel {
 
     @Column(columnDefinition = "TEXT")
     private String physiqueDescription;
+    @ManyToMany(mappedBy = "associatedRoleModels")
+    private List<TrainingModel> associatedTrainings;
 }
