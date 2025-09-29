@@ -34,6 +34,7 @@ public class UserModel {
     private boolean active = true;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private Integer age;
 
     @PrePersist
     protected void onCreate() {

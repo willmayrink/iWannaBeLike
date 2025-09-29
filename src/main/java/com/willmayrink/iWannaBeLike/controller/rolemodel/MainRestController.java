@@ -1,4 +1,4 @@
-package com.willmayrink.iWannaBeLike.controller;
+package com.willmayrink.iWannaBeLike.controller.rolemodel;
 
 import com.willmayrink.iWannaBeLike.model.rolemodel.RoleModel;
 import com.willmayrink.iWannaBeLike.repository.rolemodel.RoleModelRepository;
