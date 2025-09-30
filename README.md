@@ -7,7 +7,7 @@
 ---
 
 ### 📄 About the Project
-**iWannaBeLike** is a study and demonstration project focused on building a robust and scalable **backend service**. It simulates a complete **RESTful API**, making it an ideal template or foundation for new projects that utilize the **Java/Spring Boot** and **PostgreSQL** stack.
+**iWannaBeLike** is a study and demonstration project focused on building a robust and scalable **WebApp**. It's a projects that utilizes the **Java/Spring Boot** and **PostgreSQL** stack.
 
 This project demonstrates:
 * A well-structured Spring Boot architecture (Model, Repository, Service, and Controller layers).
