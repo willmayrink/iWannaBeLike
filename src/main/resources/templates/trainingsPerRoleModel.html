@@ -15,7 +15,7 @@
 <body>
 <nav class="navbar sticky-top navbar-expand-md p-1 text-bg-dark" data-bs-theme="dark">
     <div class="container-fluid">
-        <a th:href="@{/}" class="navbar-brand"><img th:src="@{img/icon.png}" width="32" alt=""
+        <a th:href="@{/}" class="navbar-brand"><img th:src="@{/img/icon.png}" width="32" alt=""
                                                     class="img-fluid mb-2"><span class="badge rounded-3 fs-5">iWannabelike</span></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,10 +87,8 @@
                             </td>
                             <td th:text="${training.numberRepetitions}">
                             </td>
-                            <td th:if="${training.minWeightLoad == 0}">
-                                <span th:text="">
-
-                                </span>
+                            <td>
+                                <span th:text="${training.minWeightLoad > 0 ? training.minWeightLoad + 'kg(s)' : ''}"></span>
                             </td>
                         </tr>
                     </tbody>

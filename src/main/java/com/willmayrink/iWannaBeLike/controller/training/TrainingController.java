@@ -4,6 +4,8 @@ import com.willmayrink.iWannaBeLike.model.rolemodel.RoleModel;
 import com.willmayrink.iWannaBeLike.model.training.TrainingModel;
 import com.willmayrink.iWannaBeLike.repository.rolemodel.RoleModelRepository;
 import com.willmayrink.iWannaBeLike.repository.training.TrainingRepository;
+import com.willmayrink.iWannaBeLike.service.rolemodel.RoleModelService;
+import com.willmayrink.iWannaBeLike.service.trainings.TrainingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,9 +26,10 @@ public class TrainingController {
     @GetMapping("/role_models/{id}/trainings")
     public String viewTrainingsForRoleModel(@PathVariable Long id, Model model){
         Optional<RoleModel> optionalRoleModel = roleModelRepository.findById(id);
+        TrainingService trainingService = new TrainingService();
         if(optionalRoleModel.isPresent()){
             RoleModel roleModel = optionalRoleModel.get();
-            List<TrainingModel> trainings = roleModel.getAssociatedTrainings();
+            List<TrainingModel> trainings = trainingService.getTrainingsFromRoleModel(roleModel);
             model.addAttribute("role_model", roleModel);
             model.addAttribute("trainings", trainings);
             return "trainingsPerRoleModel";
