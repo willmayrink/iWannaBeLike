@@ -57,12 +57,44 @@
                 <span th:each="model : ${role_model}">
                     <span th:text="${model.name}" class="display-5 fw-light"></span>
                 </span>
-                <span th:each="training : ${trainings}">
-                    <span th:text="${training.name}" class="badge text-bg-light"></span>
-                    <span th:text="${training.muscleGroup}" class="badge text-bg-light"></span>
-                    <span th:text="${training.numberSeries}" class="badge text-bg-light"></span>
-                    <span th:text="${training.numberRepetitions}" class="badge text-bg-light"></span>
-                </span>
+                <table class="table table-dark mt-2 table-sm shadow-lg">
+                    <thead>
+                    <tr>
+                        <td>
+                            Training
+                        </td>
+                        <td>
+                            Muscle Group
+                        </td>
+                        <td>
+                            Number of Series
+                        </td>
+                        <td>
+                            Number of Repetitions
+                        </td>
+                        <td>
+                            Minimum Weight
+                        </td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="training : ${trainings}">
+                            <td th:text="${training.name}">
+                            </td>
+                            <td th:text="${training.muscleGroup}">
+                            </td>
+                            <td th:text="${training.numberSeries}">
+                            </td>
+                            <td th:text="${training.numberRepetitions}">
+                            </td>
+                            <td th:if="${training.minWeightLoad == 0}">
+                                <span th:text="">
+
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
