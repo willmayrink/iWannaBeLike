@@ -23,10 +23,8 @@ public class TrainingModel {
     private Integer numberSeries;
     private Integer numberRepetitions;
     private Integer minWeightLoad;
-    @Lob
-    private byte[] trainingImage;
-    private String trainingImageFileName;
-    private String trainingImageContentType;
+    private String trainingIcon;
+    private String trainingLevel;
 
     @ManyToMany
     @JoinTable(
