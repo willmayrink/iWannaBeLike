@@ -57,26 +57,50 @@
                 <span th:each="model : ${role_model}">
                     <span th:text="${model.name}" class="display-5 fw-light"></span>
                 </span>
-                <div class="row mt-3">
-                    <div th:each="training : ${trainings}" class="col-auto">
-                        <div class="card mb-3 rounded-3 shadow-lg" style="width:18rem;">
-                            <img th:src="@{/img/{icon}(icon=${training.trainingIcon})}" alt="" class="card-img-top img-fluid" style="object-fit:cover;">
+                <div class="row mt-3 g-4">
+                    <div th:each="training : ${trainings}" class="col-12 col-md-6 col-lg-4">
+
+                        <div class="card rounded-3 shadow-lg h-100">
                             <div class="card-body">
-                                <div>
+                                <div class="position-relative">
                                     <h5 th:text="${training.name}" class="card-title"></h5>
                                     <h6 th:text="'('+${training.numberSeries}+'x'+${training.numberRepetitions}+')'"></h6>
+                                    <div th:switch="${training.trainingLevel}"
+                                         class="position-absolute top-0 start-0 translate-middle pb-4 ms-4">
+                                        <span th:case="'Beginner'"><span
+                                                class="badge rounded-end-0 text-bg-light">Lvl.</span><span
+                                                th:text="${training.trainingLevel}"
+                                                class="badge text-bg-success rounded-start-0"></span></span>
+                                        <span th:case="'Intermediate'"><span class="badge rounded-end-0 text-bg-light">Lvl.</span><span
+                                                th:text="${training.trainingLevel}"
+                                                class="badge text-bg-warning rounded-start-0"></span></span>
+                                        <span th:case="'Advanced'"><span
+                                                class="badge rounded-end-0 text-bg-light">Lvl.</span><span
+                                                th:text="${training.trainingLevel}"
+                                                class="badge text-bg-danger rounded-start-0"></span></span>
+                                    </div>
                                 </div>
-                                <ul th:if="${training.minWeightLoad!=0}" class="list-group list-group-flush">
+                                <ul class="list-group list-group-flush">
                                     <li class="list-group-item d-flex justify-content-between align-items-start">
-                                        <span class="badge">Minimum weight(kg): </span><span th:text="${training.minWeightLoad}" class="badge text-bg-primary"></span>
+                                        <span class="badge">Muscle group: </span><span th:text="${training.muscleGroup}"
+                                                                                       class="badge text-bg-light"></span>
                                     </li>
-                                </ul>
-                                <ul th:if="${training.minWeightLoad==0}" class="list-group list-group-flush">
                                     <li class="list-group-item d-flex justify-content-between align-items-start">
-                                        <span class="badge">Minimum weight(kg): </span><span class="badge text-bg-primary">Body weight</span>
+                                        <span class="badge">Series: </span><span th:text="${training.numberSeries}"
+                                                                                 class="badge text-bg-light"></span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <span class="badge">Repetitions: </span><span
+                                            th:text="${training.numberRepetitions}" class="badge text-bg-light"></span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <span class="badge">Minimum weight(kg): </span>
+                                        <span th:if="${training.minWeightLoad == 0}"><span th:text="'body weight'" class="badge text-bg-light" style="font-size:12px;"></span></span>
+                                        <span th:if="${training.minWeightLoad != 0}"><span th:text="${training.minWeightLoad}" class="badge text-bg-light"></span></span>
                                     </li>
                                 </ul>
                             </div>
+
                         </div>
                     </div>
                 </div>
