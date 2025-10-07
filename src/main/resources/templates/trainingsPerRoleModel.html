@@ -50,16 +50,21 @@
     </div>
 </nav>
 
-<main class="bg-indigo-700 min-vh-100 py-5">
+<main class="text-bg-light min-vh-100 py-5">
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <span th:each="model : ${role_model}">
+                    <a th:href="@{/role_models/{id}/trainings(id=${model.id - 1})}" class="text-decoration-none">
+                            <span class="material-icons">arrow_back</span>
+                        </a>
                     <span th:text="${model.name}" class="display-5 fw-light"></span>
+                        <a th:href="@{/role_models/{id}/trainings(id=${model.id + 1})}" class="text-decoration-none">
+                            <span class="material-icons">arrow_forward</span>
+                        </a>
                 </span>
                 <div class="row mt-3 g-4">
                     <div th:each="training : ${trainings}" class="col-12 col-md-6 col-lg-4">
-
                         <div class="card rounded-3 shadow-lg h-100">
                             <div class="card-body">
                                 <div class="position-relative">
@@ -68,14 +73,14 @@
                                     <div th:switch="${training.trainingLevel}"
                                          class="position-absolute top-0 start-0 translate-middle pb-4 ms-4">
                                         <span th:case="'Beginner'"><span
-                                                class="badge rounded-end-0 text-bg-light">Lvl.</span><span
+                                                class="badge rounded-end-0 text-bg-secondary">Lvl.</span><span
                                                 th:text="${training.trainingLevel}"
                                                 class="badge text-bg-success rounded-start-0"></span></span>
-                                        <span th:case="'Intermediate'"><span class="badge rounded-end-0 text-bg-light">Lvl.</span><span
+                                        <span th:case="'Intermediate'"><span class="badge rounded-end-0 text-bg-secondary">Lvl.</span><span
                                                 th:text="${training.trainingLevel}"
                                                 class="badge text-bg-warning rounded-start-0"></span></span>
                                         <span th:case="'Advanced'"><span
-                                                class="badge rounded-end-0 text-bg-light">Lvl.</span><span
+                                                class="badge rounded-end-0 text-bg-secondary">Lvl.</span><span
                                                 th:text="${training.trainingLevel}"
                                                 class="badge text-bg-danger rounded-start-0"></span></span>
                                     </div>
@@ -95,8 +100,11 @@
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-start">
                                         <span class="badge">Minimum weight(kg): </span>
-                                        <span th:if="${training.minWeightLoad == 0}"><span th:text="'body weight'" class="badge text-bg-light" style="font-size:12px;"></span></span>
-                                        <span th:if="${training.minWeightLoad != 0}"><span th:text="${training.minWeightLoad}" class="badge text-bg-light"></span></span>
+                                        <span th:if="${training.minWeightLoad == 0}"><span th:text="'body weight'"
+                                                                                           class="badge text-bg-light"
+                                                                                           style="font-size:12px;"></span></span>
+                                        <span th:if="${training.minWeightLoad != 0}"><span
+                                                th:text="${training.minWeightLoad}" class="badge text-bg-light"></span></span>
                                     </li>
                                 </ul>
                             </div>
